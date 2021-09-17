@@ -212,6 +212,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			'custom'        => FILTER_SANITIZE_STRING,
 			'start_date'    => FILTER_SANITIZE_STRING,
 			'end_date'      => FILTER_SANITIZE_STRING,
+			'limit'         => FILTER_SANITIZE_NUMBER_INT,
 			'year'          => FILTER_SANITIZE_NUMBER_INT,
 		];
 		$vars = filter_input_array( INPUT_GET, $filters );
@@ -225,7 +226,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$repository_args = [];
 //		unset( $repository_args['ends_after'] );
 		$repository_args['order'] = 'ASC';
-		$repository_args['posts_per_page'] = -1;
+		$repository_args['posts_per_page'] = $vars['limit'];
 		$repository_args['paged'] = 1;
 
 //		$date = Date::Build_date_object( '2021-01-01' );
@@ -292,17 +293,19 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		if (
 			! tribe_context()->get( 'ical' )
 			|| $vars['custom'] != 1
-			|| ! is_int( $vars['limit'] )
 		) {
 			return $count;
 		}
 
-		// If limit is -1, then "unlimited"
-		if ( $vars['limit'] == -1 ) {
+		// If limit is -1 or not set, then "unlimited"
+		if (
+			! isset( $vars['limit'] )
+			|| ['limit'] == -1
+		) {
 			return 99999;
 		}
 
-		return $vars['limit'];
+		return (int) $vars['limit'];
 	}
 
 }
