@@ -9,6 +9,7 @@
 
 namespace Tribe\Extensions\Advanced_ICal_Export_V2;
 
+use Tribe__Date_Utils as Date;
 /**
  * Class Plugin
  *
@@ -104,7 +105,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		// Start binds.
 
-
+		add_filter( 'tribe_ical_feed_posts_per_page', [ $this, 'set_limit' ], 10 );
+		add_filter( 'tribe_events_views_v2_view_repository_args', [ $this, 'custom_ical_export' ], 10, 3 );
 
 		// End binds.
 
@@ -195,5 +197,90 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$settings = $this->get_settings();
 
 		return $settings->get_option( $option, $default );
+	}
+
+	/**
+	 * @param $repository_args
+	 * @param $context
+	 * @param $view
+	 */
+	public function custom_ical_export( $repository_args, $context, $view ) {
+
+		// Sanitization
+		$filters = [
+			'ical'          => FILTER_SANITIZE_NUMBER_INT,
+			'custom'        => FILTER_SANITIZE_STRING,
+			'start_date'    => FILTER_SANITIZE_STRING,
+			'end_date'      => FILTER_SANITIZE_STRING,
+			'year'          => FILTER_SANITIZE_NUMBER_INT,
+		];
+		$vars = filter_input_array( INPUT_GET, $filters );
+
+		// Bail if not custom iCal export
+		if ( ! tribe_context()->get( 'ical' ) && $vars['custom'] != 1 ) {
+			return $repository_args;
+		}
+
+		// Resetting the arguments
+		$repository_args = [];
+//		unset( $repository_args['ends_after'] );
+		$repository_args['order'] = 'ASC';
+		$repository_args['posts_per_page'] = -1;
+		$repository_args['paged'] = 1;
+
+//		$date = Date::Build_date_object( '2021-01-01' );
+
+		// Check if there is a start_date set
+		if ( isset( $vars['start_date'] ) && Date::is_valid_date( $vars['start_date'] ) ) {
+			$start_date = Date::Build_date_object( $vars['start_date'] );
+		}
+		// If not, fall back to this year's beginning
+		else {
+			$start_date = Date::Build_date_object( date( 'Y' ) . '-01-01' );
+		}
+
+		$start = $start_date->format( 'Y-m-d' );
+
+		// Check if there is an end_date set
+		if ( isset( $vars['end_date'] ) && Date::is_valid_date( $vars['end_date'] ) ) {
+			$end_date = Date::Build_date_object( $vars['end_date'] );
+		}
+		// If there is no end date but there was a start year defined, then till the end of that year
+		elseif ( isset( $vars['start_date'] ) && ! empty( $vars['start_date'] ) ) {
+			$end_date = Date::Build_date_object( $start_date->format( 'Y' ) . '-12-31' );
+		}
+		// If no end date defined, fall back to this year's end
+		else {
+			$end_date = Date::Build_date_object( 'end of the year' );
+		}
+
+		$end = $end_date->format( 'Y-m-d' );
+
+		$repository_args['date_overlaps'] = [
+			$start,
+			$end,
+		];
+
+		return $repository_args;
+
+		/*
+		 * Default repo args
+		posts_per_page = {int} 13
+		paged = {int} 1
+		search = ""
+		hidden_from_upcoming = false
+		view_override_offset = true
+		ends_after = "now"
+		order = "ASC"
+		context_hash = "0000000030a7c93a000000006b89b679"
+		 * */
+	}
+
+	function set_limit() {
+		$x = tribe_context()->get( 'ical' );
+		$y = $_GET['custom'];
+		$z = 99;
+
+		return $z;
 	}
 }
