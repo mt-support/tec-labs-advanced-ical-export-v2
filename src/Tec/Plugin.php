@@ -276,11 +276,33 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		 * */
 	}
 
-	function set_limit() {
-		$x = tribe_context()->get( 'ical' );
-		$y = $_GET['custom'];
-		$z = 99;
+	function set_limit( $count ) {
+		// Sanitization
+		$filters = [
+			'ical'          => FILTER_SANITIZE_NUMBER_INT,
+			'custom'        => FILTER_SANITIZE_STRING,
+			'start_date'    => FILTER_SANITIZE_STRING,
+			'end_date'      => FILTER_SANITIZE_STRING,
+			'limit'         => FILTER_SANITIZE_NUMBER_INT,
+			'year'          => FILTER_SANITIZE_NUMBER_INT,
+		];
 
-		return $z;
+		$vars = filter_input_array( INPUT_GET, $filters );
+
+		if (
+			! tribe_context()->get( 'ical' )
+			|| $vars['custom'] != 1
+			|| ! is_int( $vars['limit'] )
+		) {
+			return $count;
+		}
+
+		// If limit is -1, then "unlimited"
+		if ( $vars['limit'] == -1 ) {
+			return 99999;
+		}
+
+		return $vars['limit'];
 	}
+
 }
