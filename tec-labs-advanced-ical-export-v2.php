@@ -53,7 +53,7 @@ function tribe_extension_advanced_ical_export_v2() {
 	if ( ! class_exists( '\Tribe\Extensions\Advanced_ICal_Export_V2\Plugin' ) ) {
 		tribe_transient_notice(
 			'advanced-ical-export-v2',
-			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Advanced iCal Export v2" the extension was deactivated.', '__TRIBE_DOMAIN__' ) . '</p>',
+			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Advanced iCal Export v2" the extension was deactivated.', 'tec-labs-advanced-ical-export-v2' ) . '</p>',
 			[],
 			// 1 second after that make sure the transient is removed.
 			1
