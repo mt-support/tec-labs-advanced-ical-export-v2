@@ -2,11 +2,11 @@
 /**
  * Settings Object.
  *
- * @since __TRIBE_VERSION__
+ * @since 1.0.0
  *
- * @package Tribe\Extensions\__TRIBE_NAMESPACE__
+ * @package Tribe\Extensions\Advanced_ICal_Export_V2
  */
-namespace Tribe\Extensions\__TRIBE_NAMESPACE__;
+namespace Tribe\Extensions\Advanced_ICal_Export_V2;
 
 use Tribe__Settings_Manager;
 

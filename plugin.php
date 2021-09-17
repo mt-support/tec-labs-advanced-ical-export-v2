@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name:       __TRIBE_BASE__ Extension: __TRIBE_NAME__
- * Plugin URI:        __TRIBE_URL__
- * GitHub Plugin URI: https://github.com/mt-support/tec-labs-__TRIBE_SLUG__
- * Description:       __TRIBE_DESCRIPTION__
- * Version:           __TRIBE_VERSION__
+ * Plugin Name:       The Events Calendar Extension: Advanced iCal Export v2
+ * Plugin URI:        
+ * GitHub Plugin URI: https://github.com/mt-support/tec-labs-advanced-ical-export-v2
+ * Description:       
+ * Version:           1.0.0
  * Author:            The Events Calendar
  * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
@@ -25,18 +25,18 @@
 /**
  * Define the base file that loaded the plugin for determining plugin path and other variables.
  *
- * @since __TRIBE_VERSION__
+ * @since 1.0.0
  *
  * @var string Base file that loaded the plugin.
  */
-define( 'TRIBE_EXTENSION___TRIBE_SLUG_CLEAN_UPPERCASE___FILE', __FILE__ );
+define( 'TRIBE_EXTENSION_ADVANCED_ICAL_EXPORT_V2_FILE', __FILE__ );
 
 /**
  * Register and load the service provider for loading the extension.
  *
- * @since __TRIBE_VERSION__
+ * @since 1.0.0
  */
-function tribe_extension___TRIBE_SLUG_CLEAN__() {
+function tribe_extension_advanced_ical_export_v2() {
 	// When we don't have autoloader from common we bail.
 	if ( ! class_exists( 'Tribe__Autoloader' ) ) {
 		return;
@@ -44,16 +44,16 @@ function tribe_extension___TRIBE_SLUG_CLEAN__() {
 
 	// Register the namespace so we can the plugin on the service provider registration.
 	Tribe__Autoloader::instance()->register_prefix(
-		'\\Tribe\\Extensions\\__TRIBE_NAMESPACE__\\',
+		'\\Tribe\\Extensions\\Advanced_ICal_Export_V2\\',
 		__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Tec',
-		'__TRIBE_SLUG__'
+		'advanced-ical-export-v2'
 	);
 
 	// Deactivates the plugin in case of the main class didn't autoload.
-	if ( ! class_exists( '\Tribe\Extensions\__TRIBE_NAMESPACE__\Plugin' ) ) {
+	if ( ! class_exists( '\Tribe\Extensions\Advanced_ICal_Export_V2\Plugin' ) ) {
 		tribe_transient_notice(
-			'__TRIBE_SLUG__',
-			'<p>' . esc_html__( 'Couldn\'t properly load "__TRIBE_BASE__ Extension: __TRIBE_NAME__" the extension was deactivated.', '__TRIBE_DOMAIN__' ) . '</p>',
+			'advanced-ical-export-v2',
+			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Advanced iCal Export v2" the extension was deactivated.', '__TRIBE_DOMAIN__' ) . '</p>',
 			[],
 			// 1 second after that make sure the transient is removed.
 			1
@@ -67,8 +67,8 @@ function tribe_extension___TRIBE_SLUG_CLEAN__() {
 		return;
 	}
 
-	tribe_register_provider( '\Tribe\Extensions\__TRIBE_NAMESPACE__\Plugin' );
+	tribe_register_provider( '\Tribe\Extensions\Advanced_ICal_Export_V2\Plugin' );
 }
 
 // Loads after common is already properly loaded.
-add_action( 'tribe_common_loaded', 'tribe_extension___TRIBE_SLUG_CLEAN__' );
+add_action( 'tribe_common_loaded', 'tribe_extension_advanced_ical_export_v2' );

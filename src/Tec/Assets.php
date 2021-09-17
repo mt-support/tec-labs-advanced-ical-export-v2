@@ -8,29 +8,29 @@
  *  tribe( 'assets' )->remove( 'asset-name' );
  * ```
  *
- * @since __TRIBE_VERSION__
+ * @since 1.0.0
  *
- * @package Tribe\Extensions\__TRIBE_NAMESPACE__
+ * @package Tribe\Extensions\Advanced_ICal_Export_V2
  */
 
-namespace Tribe\Extensions\__TRIBE_NAMESPACE__;
+namespace Tribe\Extensions\Advanced_ICal_Export_V2;
 
 /**
  * Register Assets.
  *
- * @since __TRIBE_VERSION__
+ * @since 1.0.0
  *
- * @package Tribe\Extensions\__TRIBE_NAMESPACE__
+ * @package Tribe\Extensions\Advanced_ICal_Export_V2
  */
 class Assets extends \tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations.
 	 *
-	 * @since __TRIBE_VERSION__
+	 * @since 1.0.0
 	 */
 	public function register() {
 		$this->container->singleton( static::class, $this );
-		$this->container->singleton( 'extension.__TRIBE_SLUG_CLEAN__.assets', $this );
+		$this->container->singleton( 'extension.advanced_ical_export_v2.assets', $this );
 
 		$plugin = tribe( Plugin::class );
 
