@@ -4,7 +4,7 @@
  * Plugin URI:        
  * GitHub Plugin URI: https://github.com/mt-support/tec-labs-advanced-ical-export-v2
  * Description:       
- * Version:           1.0.0
+ * Version:           1.0.0-beta
  * Author:            The Events Calendar
  * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
