@@ -207,15 +207,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	public function custom_ical_export( $repository_args, $context, $view ) {
 
 		// Sanitization
-		$filters = [
-			'ical'          => FILTER_SANITIZE_NUMBER_INT,
-			'custom'        => FILTER_SANITIZE_STRING,
-			'start_date'    => FILTER_SANITIZE_STRING,
-			'end_date'      => FILTER_SANITIZE_STRING,
-			'limit'         => FILTER_SANITIZE_NUMBER_INT,
-			'year'          => FILTER_SANITIZE_NUMBER_INT,
-		];
-		$vars = filter_input_array( INPUT_GET, $filters );
+		$vars = $this->getVars();
 
 		// Bail if not custom iCal export
 		if ( ! tribe_context()->get( 'ical' ) && $vars['custom'] != 1 ) {
@@ -279,16 +271,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 	function set_limit( $count ) {
 		// Sanitization
-		$filters = [
-			'ical'          => FILTER_SANITIZE_NUMBER_INT,
-			'custom'        => FILTER_SANITIZE_STRING,
-			'start_date'    => FILTER_SANITIZE_STRING,
-			'end_date'      => FILTER_SANITIZE_STRING,
-			'limit'         => FILTER_SANITIZE_NUMBER_INT,
-			'year'          => FILTER_SANITIZE_NUMBER_INT,
-		];
-
-		$vars = filter_input_array( INPUT_GET, $filters );
+		$vars = $this->getVars();
 
 		if (
 			! tribe_context()->get( 'ical' )
@@ -306,6 +289,24 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		}
 
 		return (int) $vars['limit'];
+	}
+
+	/**
+	 * @return array|false|null
+	 */
+	private function getVars() {
+		$filters = [
+			'ical'       => FILTER_SANITIZE_NUMBER_INT,
+			'custom'     => FILTER_SANITIZE_STRING,
+			'start_date' => FILTER_SANITIZE_STRING,
+			'end_date'   => FILTER_SANITIZE_STRING,
+			'limit'      => FILTER_SANITIZE_NUMBER_INT,
+			'year'       => FILTER_SANITIZE_NUMBER_INT,
+		];
+
+		$vars    = filter_input_array( INPUT_GET, $filters );
+
+		return $vars;
 	}
 
 }
