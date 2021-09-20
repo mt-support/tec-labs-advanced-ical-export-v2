@@ -210,7 +210,10 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$vars = $this->getVars();
 
 		// Bail if not custom iCal export
-		if ( ! tribe_context()->get( 'ical' ) && $vars['custom'] != 1 ) {
+		if (
+			! tribe_context()->get( 'ical' )
+			&& $vars['custom'] != 1
+		) {
 			return $repository_args;
 		}
 
@@ -224,7 +227,10 @@ class Plugin extends \tad_DI52_ServiceProvider {
 //		$date = Date::Build_date_object( '2021-01-01' );
 
 		// Check if there is a start_date set
-		if ( isset( $vars['start_date'] ) && Date::is_valid_date( $vars['start_date'] ) ) {
+		if (
+			isset( $vars['start_date'] )
+			&& Date::is_valid_date( $vars['start_date'] )
+		) {
 			$start_date = Date::Build_date_object( $vars['start_date'] );
 		}
 		// If not, fall back to this year's beginning
@@ -235,7 +241,10 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$start = $start_date->format( 'Y-m-d' );
 
 		// Check if there is an end_date set
-		if ( isset( $vars['end_date'] ) && Date::is_valid_date( $vars['end_date'] ) ) {
+		if (
+			isset( $vars['end_date'] )
+			&& Date::is_valid_date( $vars['end_date'] )
+		) {
 			$end_date = Date::Build_date_object( $vars['end_date'] );
 		}
 		// If there is no end date but there was a start year defined, then till the end of that year
@@ -248,6 +257,19 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		}
 
 		$end = $end_date->format( 'Y-m-d' );
+
+		// If year is defined then use only that.
+		if (
+			isset ( $vars['year'])
+			&& $vars['year'] >= 1900
+			&& $vars['year'] <= 2100
+		) {
+			$start_date = Date::Build_date_object( $vars['year'] . '-01-01' );
+			$start = $start_date->format( 'Y-m-d' );
+
+			$end_date   = Date::Build_date_object( $vars['year'] . '-12-31' );
+			$end = $end_date->format( 'Y-m-d' );
+		}
 
 		$repository_args['date_overlaps'] = [
 			$start,
