@@ -128,6 +128,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	}
 
 	/**
+	 * Prepares the export feed based on the supplied parameters.
+	 *
 	 * @param $repository_args
 	 * @param $context
 	 * @param $view
@@ -219,6 +221,13 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		 * */
 	}
 
+	/**
+	 * Sets the event limit in the feed based on the parameter.
+	 *
+	 * @param $count
+	 *
+	 * @return int
+	 */
 	function set_limit( $count ) {
 		// Sanitization
 		$vars = $this->getVars();
@@ -242,6 +251,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	}
 
 	/**
+	 * Sanitization of submitted parameters.
+	 *
 	 * @return array|false|null
 	 */
 	private function getVars() {
