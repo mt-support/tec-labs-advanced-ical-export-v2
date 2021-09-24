@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:       The Events Calendar Extension: Advanced iCal Export v2
- * Plugin URI:        
- * GitHub Plugin URI: https://github.com/mt-support/tec-labs-advanced-ical-export-v2
- * Description:       
- * Version:           1.0.0-beta
+ * Plugin URI:        https://theeventscalendar.com/extensions/advanced-ical-export-v2/
+ * GitHub Plugin URI: https://github.com/mt-support/tec-labs-advanced-ical-export-v2/
+ * Description:       Advanced export possibilities through the iCal feed for the updated (v2) views.
+ * Version:           1.0.0
  * Author:            The Events Calendar
  * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
