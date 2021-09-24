@@ -67,15 +67,6 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	public $plugin_url;
 
 	/**
-	 * @since 1.0.0
-	 *
-	 * @var Settings
-	 *
-	 * TODO: Remove if not using settings
-	 */
-	private $settings;
-
-	/**
 	 * Setup the Extension's properties.
 	 *
 	 * This always executes even if the required plugins are not present.
@@ -98,10 +89,6 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			// If the plugin dependency manifest is not met, then bail and stop here.
 			return;
 		}
-
-		// Do the settings.
-		// TODO: Remove if not using settings
-		$this->get_settings();
 
 		// Start binds.
 
@@ -138,65 +125,6 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		$this->container->singleton( Plugin_Register::class, $plugin_register );
 		$this->container->singleton( 'extension.advanced_ical_export_v2', $plugin_register );
-	}
-
-	/**
-	 * Get this plugin's options prefix.
-	 *
-	 * Settings_Helper will append a trailing underscore before each option.
-	 *
-	 * @return string
-     *
-	 * @see \Tribe\Extensions\Advanced_ICal_Export_V2\Settings::set_options_prefix()
-	 *
-	 * TODO: Remove if not using settings
-	 */
-	private function get_options_prefix() {
-		return (string) str_replace( '-', '_', 'tec-labs-advanced-ical-export-v2' );
-	}
-
-	/**
-	 * Get Settings instance.
-	 *
-	 * @return Settings
-	 *
-	 * TODO: Remove if not using settings
-	 */
-	private function get_settings() {
-		if ( empty( $this->settings ) ) {
-			$this->settings = new Settings( $this->get_options_prefix() );
-		}
-
-		return $this->settings;
-	}
-
-	/**
-	 * Get all of this extension's options.
-	 *
-	 * @return array
-	 *
-	 * TODO: Remove if not using settings
-	 */
-	public function get_all_options() {
-		$settings = $this->get_settings();
-
-		return $settings->get_all_options();
-	}
-
-	/**
-	 * Get a specific extension option.
-	 *
-	 * @param $option
-	 * @param string $default
-	 *
-	 * @return array
-	 *
-	 * TODO: Remove if not using settings
-	 */
-	public function get_option( $option, $default = '' ) {
-		$settings = $this->get_settings();
-
-		return $settings->get_option( $option, $default );
 	}
 
 	/**
