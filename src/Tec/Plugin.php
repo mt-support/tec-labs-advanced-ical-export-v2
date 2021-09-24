@@ -2,20 +2,21 @@
 /**
  * Plugin Class.
  *
- * @since 1.0.0
- *
  * @package Tribe\Extensions\Advanced_ICal_Export_V2
+ * @since   1.0.0
+ *
  */
 
 namespace Tribe\Extensions\Advanced_ICal_Export_V2;
 
 use Tribe__Date_Utils as Date;
+
 /**
  * Class Plugin
  *
- * @since 1.0.0
- *
  * @package Tribe\Extensions\Advanced_ICal_Export_V2
+ * @since   1.0.0
+ *
  */
 class Plugin extends \tad_DI52_ServiceProvider {
 	/**
@@ -148,10 +149,10 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		}
 
 		// Resetting the arguments
-		$repository_args = [];
-		$repository_args['order'] = 'ASC';
+		$repository_args                   = [];
+		$repository_args['order']          = 'ASC';
 		$repository_args['posts_per_page'] = $vars['limit'];
-		$repository_args['paged'] = 1;
+		$repository_args['paged']          = 1;
 
 		// Check if there is a start_date set
 		if (
@@ -159,8 +160,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			&& Date::is_valid_date( $vars['start_date'] )
 		) {
 			$start_date = Date::Build_date_object( $vars['start_date'] );
-		}
-		// If not, fall back to this year's beginning
+		} // If not, fall back to this year's beginning
 		else {
 			$start_date = Date::Build_date_object( date( 'Y' ) . '-01-01' );
 		}
@@ -173,12 +173,13 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			&& Date::is_valid_date( $vars['end_date'] )
 		) {
 			$end_date = Date::Build_date_object( $vars['end_date'] );
-		}
-		// If there is no end date but there was a start year defined, then till the end of that year
-		elseif ( isset( $vars['start_date'] ) && ! empty( $vars['start_date'] ) ) {
+		} // If there is no end date but there was a start year defined, then till the end of that year
+		elseif (
+			isset( $vars['start_date'] )
+			&& ! empty( $vars['start_date'] )
+		) {
 			$end_date = Date::Build_date_object( $start_date->format( 'Y' ) . '-12-31' );
-		}
-		// If no end date defined, fall back to this year's end
+		} // If no end date defined, fall back to this year's end
 		else {
 			$end_date = Date::Build_date_object( 'end of the year' );
 		}
@@ -187,15 +188,15 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		// If year is defined then use only that.
 		if (
-			isset ( $vars['year'])
+			isset ( $vars['year'] )
 			&& $vars['year'] >= 1900
 			&& $vars['year'] <= 2100
 		) {
 			$start_date = Date::Build_date_object( $vars['year'] . '-01-01' );
-			$start = $start_date->format( 'Y-m-d' );
+			$start      = $start_date->format( 'Y-m-d' );
 
-			$end_date   = Date::Build_date_object( $vars['year'] . '-12-31' );
-			$end = $end_date->format( 'Y-m-d' );
+			$end_date = Date::Build_date_object( $vars['year'] . '-12-31' );
+			$end      = $end_date->format( 'Y-m-d' );
 		}
 
 		$repository_args['date_overlaps'] = [
@@ -227,7 +228,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		// If limit is -1 or not set, then "unlimited"
 		if (
 			! isset( $vars['limit'] )
-			|| ['limit'] == -1
+			|| $vars['limit'] == - 1
 		) {
 			return 99999;
 		}
@@ -250,7 +251,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			'year'       => FILTER_SANITIZE_NUMBER_INT,
 		];
 
-		$vars    = filter_input_array( INPUT_GET, $filters );
+		$vars = filter_input_array( INPUT_GET, $filters );
 
 		return $vars;
 	}
