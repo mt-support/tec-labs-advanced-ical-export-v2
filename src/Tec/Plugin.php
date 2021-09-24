@@ -93,8 +93,10 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		// Start binds.
 
+
 		add_filter( 'tribe_ical_feed_posts_per_page', [ $this, 'set_limit' ], 10 );
 		add_filter( 'tribe_events_views_v2_view_repository_args', [ $this, 'custom_ical_export' ], 10, 3 );
+		//add_filter( 'tribe_events_views_v2_view_ical_repository_args', [ $this, 'custom_ical_export' ], 10, 2 );
 
 		// End binds.
 
@@ -136,6 +138,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 * @param $view
 	 */
 	public function custom_ical_export( $repository_args, $context, $view ) {
+	//public function custom_ical_export( $repository_args, $view ) {
 
 		// Sanitization
 		$vars = $this->getVars();
