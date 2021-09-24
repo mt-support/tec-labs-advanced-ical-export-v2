@@ -149,12 +149,9 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		// Resetting the arguments
 		$repository_args = [];
-//		unset( $repository_args['ends_after'] );
 		$repository_args['order'] = 'ASC';
 		$repository_args['posts_per_page'] = $vars['limit'];
 		$repository_args['paged'] = 1;
-
-//		$date = Date::Build_date_object( '2021-01-01' );
 
 		// Check if there is a start_date set
 		if (
@@ -207,18 +204,6 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		];
 
 		return $repository_args;
-
-		/*
-		 * Default repo args
-		posts_per_page = {int} 13
-		paged = {int} 1
-		search = ""
-		hidden_from_upcoming = false
-		view_override_offset = true
-		ends_after = "now"
-		order = "ASC"
-		context_hash = "0000000030a7c93a000000006b89b679"
-		 * */
 	}
 
 	/**
