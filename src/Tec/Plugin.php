@@ -153,7 +153,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		// Resetting the arguments
 		$repository_args                   = [];
 		$repository_args['order']          = 'ASC';
-		$repository_args['posts_per_page'] = $vars['limit'];
+		$repository_args['posts_per_page'] = isset( $vars['limit'] ) ? $vars['limit'] : 20;
 		$repository_args['paged']          = 1;
 
 		// Check if there is a start_date set
