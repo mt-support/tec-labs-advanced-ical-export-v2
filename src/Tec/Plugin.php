@@ -162,8 +162,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			&& Date::is_valid_date( $vars['start_date'] )
 		) {
 			$start_date = Date::Build_date_object( $vars['start_date'] );
-		} // If not, fall back to this year's beginning
-		else {
+		} else {
+			// If not, fall back to this year's beginning.
 			$start_date = Date::Build_date_object( date( 'Y' ) . '-01-01' );
 		}
 
