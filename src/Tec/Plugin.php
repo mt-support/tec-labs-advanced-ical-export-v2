@@ -138,7 +138,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 */
 	public function custom_ical_export( $repository_args, $context, $view ) {
 
-		// Sanitization
+		// Sanitization.
 		$vars = $this->getVars();
 
 		// Bail if not custom iCal export.
