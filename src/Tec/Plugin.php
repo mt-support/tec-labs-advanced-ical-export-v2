@@ -227,7 +227,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			return $count;
 		}
 
-		// If limit is -1 or not set, then "unlimited"
+		// If limit is -1 or not set, then "unlimited".
 		if (
 			! isset( $vars['limit'] )
 			|| $vars['limit'] == - 1
