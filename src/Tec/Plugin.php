@@ -141,7 +141,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		// Sanitization
 		$vars = $this->getVars();
 
-		// Bail if not custom iCal export
+		// Bail if not custom iCal export.
 		if (
 			! tribe_context()->get( 'ical' )
 			&& ! empty( $vars['custom'] )
