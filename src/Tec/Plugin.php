@@ -222,7 +222,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		if (
 			! tribe_context()->get( 'ical' )
-			|| $vars['custom'] != 1
+			|| empty( $vars['custom'] )
+			|| 1 != $vars['custom']
 		) {
 			return $count;
 		}
