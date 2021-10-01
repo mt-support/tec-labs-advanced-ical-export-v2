@@ -137,7 +137,6 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 * @param $view
 	 */
 	public function custom_ical_export( $repository_args, $context, $view ) {
-	//public function custom_ical_export( $repository_args, $view ) {
 
 		// Sanitization
 		$vars = $this->getVars();
