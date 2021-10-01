@@ -150,7 +150,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			return $repository_args;
 		}
 
-		// Resetting the arguments
+		// Resetting the arguments.
 		$repository_args                   = [];
 		$repository_args['order']          = 'ASC';
 		$repository_args['posts_per_page'] = isset( $vars['limit'] ) ? $vars['limit'] : 20;
