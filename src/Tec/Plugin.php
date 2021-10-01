@@ -144,7 +144,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		// Bail if not custom iCal export
 		if (
 			! tribe_context()->get( 'ical' )
-			&& $vars['custom'] != 1
+			&& ! empty( $vars['custom'] )
+			&& 1 != $vars['custom']
 		) {
 			return $repository_args;
 		}
