@@ -175,14 +175,14 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			&& Date::is_valid_date( $vars['end_date'] )
 		) {
 			$end_date = Date::Build_date_object( $vars['end_date'] );
-		} // If there is no end date but there was a start year defined, then till the end of that year
-		elseif (
+		} elseif (
 			isset( $vars['start_date'] )
 			&& ! empty( $vars['start_date'] )
 		) {
+			// If there is no end date but there was a start year defined, then till the end of that year.
 			$end_date = Date::Build_date_object( $start_date->format( 'Y' ) . '-12-31' );
-		} // If no end date defined, fall back to this year's end
-		else {
+		} else {
+			// If no end date defined, fall back to this year's end.
 			$end_date = Date::Build_date_object( 'end of the year' );
 		}
 
