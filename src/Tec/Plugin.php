@@ -169,7 +169,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		$start = $start_date->format( 'Y-m-d' );
 
-		// Check if there is an end_date set
+		// Check if there is an end_date set.
 		if (
 			isset( $vars['end_date'] )
 			&& Date::is_valid_date( $vars['end_date'] )
