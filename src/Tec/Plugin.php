@@ -217,7 +217,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 * @return int
 	 */
 	function set_limit( $count ) {
-		// Sanitization
+		// Sanitization.
 		$vars = $this->getVars();
 
 		if (
