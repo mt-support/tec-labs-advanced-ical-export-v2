@@ -156,7 +156,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		$repository_args['posts_per_page'] = isset( $vars['limit'] ) ? $vars['limit'] : 20;
 		$repository_args['paged']          = 1;
 
-		// Check if there is a start_date set
+		// Check if there is a start_date set.
 		if (
 			isset( $vars['start_date'] )
 			&& Date::is_valid_date( $vars['start_date'] )
