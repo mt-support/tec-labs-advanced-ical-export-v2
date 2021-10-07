@@ -203,6 +203,14 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			$end      = $end_date->format( 'Y-m-d' );
 		}
 
+		// Die if the date range is invalic.
+		if (
+			$start_date > $end_date
+			|| $start_date == $end_date
+		) {
+			die( 'Invalid date range.' );
+		}
+
 		$repository_args['date_overlaps'] = [
 			$start,
 			$end,
