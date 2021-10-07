@@ -163,8 +163,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		) {
 			$start_date = Date::Build_date_object( $vars['start_date'] );
 		} else {
-			// If not, fall back to this year's beginning.
-			$start_date = Date::Build_date_object( date( 'Y' ) . '-01-01' );
+			// If not, fall back to today.
+			$start_date = Date::Build_date_object( date( 'Y-m-d' ) );
 		}
 
 		$start = $start_date->format( 'Y-m-d' );
