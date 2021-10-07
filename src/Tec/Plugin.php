@@ -236,7 +236,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			return 99999;
 		}
 
-		return (int) $vars['limit'];
+		return isset( $vars['limit'] ) ? (int) $vars['limit'] : 20;
 	}
 
 	/**
