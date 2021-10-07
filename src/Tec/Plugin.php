@@ -182,8 +182,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			// If there is no end date but there was a start year defined, then till the end of that year.
 			$end_date = Date::Build_date_object( $start_date->format( 'Y' ) . '-12-31' );
 		} else {
-			// If no end date defined, fall back to this year's end.
-			$end_date = Date::Build_date_object( 'end of the year' );
+			// If no end date and no start date defined, fall back to this year's end.
+			$end_date = Date::Build_date_object( date( 'Y' ) . '-12-31' );
 		}
 
 		$end = $end_date->format( 'Y-m-d' );
