@@ -146,9 +146,8 @@ class Plugin extends \tad_DI52_ServiceProvider {
 
 		// Bail if not custom iCal export.
 		if (
-			! tribe_context()->get( 'ical' )
-			&& ! empty( $vars['custom'] )
-			&& 1 != $vars['custom']
+			! isset( $vars['custom'] )
+			|| 1 != $vars['custom']
 		) {
 			return $repository_args;
 		}
@@ -223,8 +222,9 @@ class Plugin extends \tad_DI52_ServiceProvider {
 		// Sanitization.
 		$vars = $this->getVars();
 
+		// Change limit only if it's a custom feed.
 		if (
-			! tribe_context()->get( 'ical' )
+			! isset( $vars['custom'] )
 			|| empty( $vars['custom'] )
 			|| 1 != $vars['custom']
 		) {
