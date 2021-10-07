@@ -203,7 +203,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			$end      = $end_date->format( 'Y-m-d' );
 		}
 
-		// Die if the date range is invalic.
+		// Die if the date range is invalid.
 		if (
 			$start_date > $end_date
 			|| $start_date == $end_date
