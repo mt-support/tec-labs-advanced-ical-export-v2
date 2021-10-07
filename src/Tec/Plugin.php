@@ -177,16 +177,9 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			&& Date::is_valid_date( $vars['end_date'] )
 		) {
 			$end_date = Date::Build_date_object( $vars['end_date'] );
-		} elseif (
-			isset( $vars['start_date'] )
-			&& ! empty( $vars['start_date'] )
-		) {
-			// If there is no end date but there was a start date defined, then 1 year from the start date.
-			$end_date = Date::Build_date_object( $start_date->format( 'Y-m-d' ) );
-			date_add( $end_date, date_interval_create_from_date_string( '1 year' ) );
 		} else {
-			// If no end date and no start date defined, fall back to one year from today.
-			$end_date = Date::Build_date_object( date( 'Y-m-d' ) );
+			// If there is no end date, then fall back to 1 year from the start date.
+			$end_date = Date::Build_date_object( $start_date->format( 'Y-m-d' ) );
 			date_add( $end_date, date_interval_create_from_date_string( '1 year' ) );
 		}
 
