@@ -209,6 +209,11 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			$end,
 		];
 
+		if ( isset( $vars['category'] ) ) {
+			$repository_args['event_category'] = $vars['category'];
+			$repository_args['tribe_events_cat'] = $vars['category'];
+		}
+
 		return $repository_args;
 	}
 
@@ -259,6 +264,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 			'end_date'   => FILTER_SANITIZE_STRING,
 			'limit'      => FILTER_SANITIZE_NUMBER_INT,
 			'year'       => FILTER_SANITIZE_NUMBER_INT,
+			'category'   => FILTER_SANITIZE_STRING,
 		];
 
 		$vars = filter_input_array( INPUT_GET, $filters );
