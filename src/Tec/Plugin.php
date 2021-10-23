@@ -134,7 +134,6 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 * Prepares the export feed based on the supplied parameters.
 	 *
 	 * @param $repository_args
-	 * @param $context
 	 * @param $view
 	 */
 	public function custom_ical_export( $repository_args, $view ) {
