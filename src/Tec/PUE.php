@@ -9,6 +9,7 @@
 
 namespace Tribe\Extensions\Advanced_ICal_Export_V2;
 
+use TEC\Common\Contracts\Service_Provider;
 use Tribe__PUE__Checker;
 
 /**
@@ -18,7 +19,7 @@ use Tribe__PUE__Checker;
  *
  * @package Tribe\Extensions\Advanced_ICal_Export_V2;
  */
-class PUE extends \tad_DI52_ServiceProvider {
+class PUE extends Service_Provider {
 
 	/**
 	 * The slug used for PUE.

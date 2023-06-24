@@ -9,6 +9,7 @@
 
 namespace Tribe\Extensions\Advanced_ICal_Export_V2;
 
+use TEC\Common\Contracts\Service_Provider;
 use Tribe__Date_Utils as Date;
 
 /**
@@ -18,7 +19,7 @@ use Tribe__Date_Utils as Date;
  * @since   1.0.0
  *
  */
-class Plugin extends \tad_DI52_ServiceProvider {
+class Plugin extends Service_Provider {
 	/**
 	 * Stores the version for the plugin.
 	 *
@@ -26,7 +27,7 @@ class Plugin extends \tad_DI52_ServiceProvider {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '1.1.1';
 
 	/**
 	 * Stores the base slug for the plugin.
